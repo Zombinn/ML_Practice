@@ -37,16 +37,24 @@ Modify:
 def classify0(inX, dataSet, labels, k):
     #numpy函数shape[0]返回dataSet的行数
     dataSetSize = dataSet.shape[0]
+    print(dataSet)
+    print(inX)
+    print()
     #在列向量方向上重复inX共1次(横向)，行向量方向上重复inX共dataSetSize次(纵向)
     diffMat = np.tile(inX, (dataSetSize, 1)) - dataSet
+    print(diffMat)
     #二维特征相减后平方
     sqDiffMat = diffMat**2
-    #sum()所有元素相加，sum(0)列相加，sum(1)行相加
+    print(sqDiffMat)
+    #sum()所有元素相加，sum(0)列相加，sum(1)行相加 
     sqDistances = sqDiffMat.sum(axis=1)
+    print(sqDistances)
     #开方，计算出距离
     distances = sqDistances**0.5
+    print(distances)
     #返回distances中元素从小到大排序后的索引值
     sortedDistIndices = distances.argsort()
+    print(sortedDistIndices)
     #定一个记录类别次数的字典
     classCount = {}
     for i in range(k):
@@ -60,6 +68,7 @@ def classify0(inX, dataSet, labels, k):
     #key=operator.itemgetter(0)根据字典的键进行排序
     #reverse降序排序字典
     sortedClassCount = sorted(classCount.items(),key=operator.itemgetter(1),reverse=True)
+    print(sortedClassCount)
     #返回次数最多的类别,即所要分类的类别
     return sortedClassCount[0][0]
 
